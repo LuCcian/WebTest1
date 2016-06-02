@@ -24,7 +24,7 @@
 		useridLen=userid.length();
 	}
 	%>
-	欢迎注册MOBS
+	欢迎注册MOBS(多人在线账务系统)
 	</h1>
 	<form name="registerForm1" action="Register" method="post">
 	<table>
