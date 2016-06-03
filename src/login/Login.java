@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -55,11 +56,21 @@ public class Login extends HttpServlet
 					response.sendRedirect(request.getContextPath() + "/HomePage.html");
 					//responseOut.println("<h1>Welcome :"+userid+"!</h1>");
 				else	//wrong password
-					responseOut.println("<h1>wrong password!</h1>");
+				{
+					request.setAttribute("userid", userid);
+					request.setAttribute("addInf", "wrong password!");
+					RequestDispatcher rd=request.getRequestDispatcher("/index.jsp");
+					rd.forward(request, response);
+					//responseOut.println("<h1>wrong password!</h1>");
+				}
 			}
 			else	//no records found
 			{
-				responseOut.println("<h1>userid:"+userid+"not found!</h1>");
+				request.setAttribute("userid", userid);
+				request.setAttribute("addInf", "no such user!");
+				RequestDispatcher rd=request.getRequestDispatcher("/index.jsp");
+				rd.forward(request, response);
+				//responseOut.println("<h1>userid:"+userid+"not found!</h1>");
 			}
 			return;
 		}

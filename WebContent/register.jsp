@@ -8,22 +8,6 @@
 </head>
 <body>
 	<h1 align="center">
-	<%
-	String userid;
-	int useridLen=0;
-	userid=request.getParameter("userid");
-	if(userid!=null)
-	{
-		useridLen=userid.length();
-		if(useridLen>0)
-			userid=new String(userid.getBytes("8859_1"),"gb2312");
-	}
-	else
-	{
-		userid= "liuchao1000";
-		useridLen=userid.length();
-	}
-	%>
 	欢迎注册MOBS(多人在线账务系统)
 	</h1>
 	<form name="registerForm1" action="Register" method="post">
@@ -33,7 +17,7 @@
 			用户名：
 		</td>
 		<td>
-			<input type="text" size="18" name="userid" value=<%=userid%> />
+			<input type="text" size="18" name="userid" value=<%=request.getAttribute("userid")==null?"":request.getAttribute("userid") %> />
 		</td>
 	</tr>
 	<tr>
@@ -52,6 +36,15 @@
 			<input type="password" size="19" name="confirmPassword"/>
 		</td>
 	</tr>
+	<tr>
+    <td colspan="2">
+    <%
+    	//out.print("["+request.getAttribute("addInf")+"]");
+    	if(request.getAttribute("addInf")!=null)
+    		out.print(request.getAttribute("addInf"));
+    %>
+    </td>
+    </tr>
 	</table>
 	
 	<table>
@@ -65,6 +58,7 @@
 		</td>
 	</tr>
 	</table>
+	<p><a href="index.jsp">返回</a></p>
 	</form>
 </body>
 </html>

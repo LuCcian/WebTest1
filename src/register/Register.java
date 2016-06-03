@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,13 +54,31 @@ public class Register extends HttpServlet
 			ResultSet qryRs = statement.executeQuery(qrySQL);
 			if(qryRs.next())	//record found
 			{
-				responseOut.println("<h1>the userid:"+userid+"has been used</h1>");
+				request.setAttribute("userid", userid);
+				request.setAttribute("addInf", "user name has been used,pls try another one");
+				RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+				rd.forward(request, response);
+				//responseOut.println("<h1>the userid:"+userid+"has been used</h1>");
 			}
 			else	//no records found
 			{
-				String insSQL = "insert into mobs.t_user(user_name,pass_word) values('"+userid+"','"+password+"')";
-				statement.execute(insSQL);
-				responseOut.println("<h1>userid:"+userid+" register succeeded</h1>");
+				if(0==password.compareTo(confirmPassword))
+				{
+					String insSQL = "insert into mobs.t_user(user_name,pass_word) values('"+userid+"','"+password+"')";
+					statement.execute(insSQL);
+					request.setAttribute("userid", userid);
+					request.setAttribute("addInf", "regist succeeded,pls log in");
+					RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+					rd.forward(request, response);
+					//responseOut.println("<h1>userid:"+userid+" register succeeded</h1>");
+				}
+				else
+				{
+					request.setAttribute("userid", userid);
+					request.setAttribute("addInf", "confirm password is different from password,pls check");
+					RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+					rd.forward(request, response);
+				}
 			}
 			return;
 		}

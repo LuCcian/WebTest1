@@ -29,7 +29,7 @@
 			用户名：
 		</td>
 		<td>
-			<input type="text" size="18" name="userid"/>
+			<input type="text" size="18" name="userid" value=<%=request.getAttribute("userid")==null?"":request.getAttribute("userid") %>/>
 		</td>
 	</tr>
 	<tr>
@@ -41,7 +41,7 @@
 		</td>
 	</tr>
 	</table>
-	
+
 	<table>
 	<tr>
 		<td width="64"/>
@@ -52,6 +52,9 @@
 			<input type="submit" name="register" value="注册" onClick="return register_click()"/>
 		</td>
 	</tr>
+	<tr>
+    <td colspan="2"><%=request.getAttribute("addInf")==null?"":request.getAttribute("addInf") %></td>
+    </tr>
 	</table>
 	</form>
 	<p><a href="register.jsp">注册新用户</a></p>
