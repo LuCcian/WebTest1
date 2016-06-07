@@ -29,7 +29,7 @@
 			用户名：
 		</td>
 		<td>
-			<input type="text" size="18" name="userid" value=<%=request.getAttribute("userid")==null?"":request.getAttribute("userid") %>/>
+			<input type="text" size="18" name="userid" value="<%=((request.getAttribute("userid")==null)?(""):("not null")) %>" />
 		</td>
 	</tr>
 	<tr>
@@ -53,7 +53,7 @@
 		</td>
 	</tr>
 	<tr>
-    <td colspan="2"><%=request.getAttribute("addInf")==null?"":request.getAttribute("addInf") %></td>
+    <td colspan="2"><%=request.getAttribute("addInf")==null?"":request.getAttribute("addInf").toString() %></td>
     </tr>
 	</table>
 	</form>

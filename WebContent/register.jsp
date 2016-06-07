@@ -17,7 +17,7 @@
 			用户名：
 		</td>
 		<td>
-			<input type="text" size="18" name="userid" value=<%=request.getAttribute("userid")==null?"":request.getAttribute("userid") %> />
+			<input type="text" size="18" name="userid" value="<%=((request.getAttribute("userid")==null)?"":(request.getAttribute("userid").toString())) %>" />
 		</td>
 	</tr>
 	<tr>
@@ -41,7 +41,7 @@
     <%
     	//out.print("["+request.getAttribute("addInf")+"]");
     	if(request.getAttribute("addInf")!=null)
-    		out.print(request.getAttribute("addInf"));
+    		out.print(request.getAttribute("addInf").toString());
     %>
     </td>
     </tr>
